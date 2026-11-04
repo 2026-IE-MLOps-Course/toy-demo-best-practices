@@ -1,6 +1,6 @@
 from src.load_data import load_data
 from src.clean_data import clean_data
-from src.validate import validate, validate_schema
+from src.validate import validate
 from src.model import predict, accuracy
 
 RAW_DATA_PATH = "data/raw/customers.csv"
@@ -13,7 +13,6 @@ TRACKING_API_KEY = "sk-live-4f9a2c7e1b8d4a6f9c3e2b1a7d5f8e0c"  # Synthetic, neve
 
 def run():
     df = load_data(RAW_DATA_PATH)
-    validate_schema(df, ["customer_id", "usage_hours", "churned"])
     df = clean_data(df)
     validate(df, ["customer_id", "usage_hours", "churned"], "usage_hours")
     preds = predict(df["usage_hours"], USAGE_THRESHOLD)

@@ -1,15 +1,12 @@
-"""Run the configured pipeline: python -m src.main"""
-
-import json
 import logging
 from pathlib import Path
 
-from src.clean_data import clean_data
-from src.config import load_config
 from src.load_data import load_data
+from src.clean_data import clean_data
+from src.validate import validate
+from src.model import predict, accuracy
+from src.config import load_config
 from src.logger import configure_logging
-from src.model import accuracy, predict
-from src.validate import validate, validate_schema
 
 logger = logging.getLogger(__name__)
 
@@ -19,42 +16,39 @@ TRACKING_API_KEY = "sk-live-4f9a2c7e1b8d4a6f9c3e2b1a7d5f8e0c"  # Synthetic, neve
 
 def run():
     cfg = load_config(PROJECT_ROOT / "config.yaml")
-    paths, data_cfg, gate = cfg["paths"], cfg["data"], cfg["quality_gate"]
-    configure_logging(
-        level=cfg["logging"]["level"], log_file=PROJECT_ROOT / paths["log_file"]
-    )
-    api_key = TRACKING_API_KEY
-    df = load_data(PROJECT_ROOT / paths["raw_data"])
-    validate_schema(df, data_cfg["required_columns"])
-    df = clean_data(df, data_cfg["feature"])
-    validate(df, data_cfg["required_columns"], data_cfg["feature"])
-    preds = predict(df[data_cfg["feature"]], cfg["model"]["usage_threshold"])
-    score = accuracy(df[data_cfg["target"]], preds)
-    passed = bool(score >= gate["min_value"])
-    logger.info(
-        "Quality gate %s: %s = %.3f (minimum %.2f)",
-        "met" if passed else "NOT met",
-        gate["metric"],
-        score,
-        gate["min_value"],
-    )
-    metrics = {gate["metric"]: score, "gate_met": passed, "rows": len(df)}
-    report_path = PROJECT_ROOT / paths["report"]
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
-    logger.info("Report written to %s", report_path.relative_to(PROJECT_ROOT))
-    logger.info("Sending metrics with key %s", api_key)
-    return metrics
+    configure_logging(cfg["logging"]["level"], PROJECT_ROOT / cfg["paths"]["log_file"])
+    feature = cfg["data"]["feature"]
+    df = load_data(PROJECT_ROOT / cfg["paths"]["raw_data"])
+    df = clean_data(df, feature)
+    validate(df, cfg["data"]["required_columns"], feature)
+    threshold = cfg["model"]["usage_threshold"]
+    logger.debug("Predicting with threshold %.1f", threshold)
+    preds = predict(df[feature], threshold)
+    score = accuracy(df[cfg["data"]["target"]], preds)
+    gate = cfg["quality_gate"]
+    if score >= gate["min_value"]:
+        logger.info(
+            "Quality gate met: %s = %.3f (minimum %.2f)",
+            gate["metric"],
+            score,
+            gate["min_value"],
+        )
+    else:
+        logger.warning(
+            "Quality gate NOT met: %s = %.3f (minimum %.2f)",
+            gate["metric"],
+            score,
+            gate["min_value"],
+        )
+    print("sending metrics with key", TRACKING_API_KEY)
+    return score
 
 
 def main():
-    """Exit 1 on an exception or a failed quality gate; keep the report either way."""
     try:
-        metrics = run()
+        run()
     except Exception:
         logger.exception("Pipeline failed")
-        raise SystemExit(1)
-    if not metrics["gate_met"]:
         raise SystemExit(1)
 
 

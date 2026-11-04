@@ -1,5 +1,5 @@
-def clean_data(df, feature):
+def clean_data(df):
     before = len(df)
-    df = df.dropna(subset=[feature])
+    df = df.dropna(subset=["usage_hours"])
     print(f"dropped {before-len(df)} rows")
     return df

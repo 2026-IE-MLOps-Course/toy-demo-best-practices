@@ -1,8 +1,6 @@
-# config.yaml: single source of truth for NON-SECRET settings
-# Change behaviour here, not in the code. Secrets go in .env, never here
-
+# config.yaml: every NON-SECRET setting, in one place
 paths:
-  raw_data: "data/raw/customers.csv"   # try "data/raw/customers_bad.csv"
+  raw_data: "data/raw/customers.csv"
   report: "reports/metrics.json"
   log_file: "logs/pipeline.log"
 
@@ -12,7 +10,7 @@ data:
   target: "churned"
 
 model:
-  usage_threshold: 10.0                # predict churn below this many hours
+  usage_threshold: 10.0  # churn below this many hours
 
 quality_gate:
   metric: "accuracy"

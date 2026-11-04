@@ -41,13 +41,13 @@ Expect accuracy `0.9090909090909091` and `quality gate met`. The other messages 
 | `checkpoints/00-start/` | Starting version and recovery copy |
 | `checkpoints/01-error-handling/` | Reject bad inputs with clear errors |
 | `checkpoints/02-code-quality/` | Format code and fix lint findings |
-| `checkpoints/03-configuration/` | Load settings and write a report |
+| `checkpoints/03-configuration/` | Read settings from `config.yaml` |
 | `checkpoints/04-logging/` | Record progress and failures |
 | `checkpoints/05-security/` | Load local values without exposing them |
 
 Follow the instructor and edit only `work`. Checkpoints are complete reference versions for comparison and recovery. The final checkpoint includes all five practices
 
-Temporary files, local `.env` files, logs and reports are excluded by the root `.gitignore`. Create `tmp` in Explorer only when the instructor asks you to archive a log or recover your work
+Local `.env` files and logs are excluded by `.gitignore`
 
 ## If stuck
 

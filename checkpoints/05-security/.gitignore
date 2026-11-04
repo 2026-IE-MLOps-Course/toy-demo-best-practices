@@ -1,0 +1,3 @@
+# Secrets stay on this computer
+.env
+!.env.example
