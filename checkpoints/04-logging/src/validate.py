@@ -13,7 +13,8 @@ def validate(df, required_columns, feature):
     negative = int((df[feature] < 0).sum())
     if negative:
         raise ValueError(
-            f"{negative} row(s) have a negative {feature}; fix the source data"
+            f"{negative} row(s) have a negative {feature}; "
+            "fix the source data"
         )
     logger.info("Validation passed: %d rows", len(df))
     return True

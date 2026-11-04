@@ -54,6 +54,9 @@ def run():
 def main():
     try:
         run()
+    except (ValueError, OSError, KeyError) as exc:
+        logger.error("Pipeline stopped: %s", exc)
+        raise SystemExit(1) from None
     except Exception:
         logger.exception("Pipeline failed")
         raise SystemExit(1)

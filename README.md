@@ -39,7 +39,7 @@ Expect accuracy `0.9090909090909091` and `quality gate met`. The other messages 
 | --- | --- |
 | `work/` | Your editable project; run all lesson commands here |
 | `checkpoints/00-start/` | Starting version and recovery copy |
-| `checkpoints/01-error-handling/` | Reject bad inputs with clear errors |
+| `checkpoints/01-error-handling/` | Reject bad inputs, report the next action and exit 1 |
 | `checkpoints/02-code-quality/` | Format code and fix lint findings |
 | `checkpoints/03-configuration/` | Read settings from `config.yaml` |
 | `checkpoints/04-logging/` | Record progress and failures |

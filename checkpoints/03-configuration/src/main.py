@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from src.load_data import load_data
@@ -27,5 +28,13 @@ def run():
     return score
 
 
+def main():
+    try:
+        run()
+    except (ValueError, OSError, KeyError) as exc:
+        print(f"Pipeline stopped: {exc}", file=sys.stderr)
+        raise SystemExit(1) from None
+
+
 if __name__ == "__main__":
-    run()
+    main()
