@@ -1,0 +1,18 @@
+name: best-practices
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas
+  - pyyaml          # 2.3 read config.yaml
+  - python-dotenv   # 2.5 load secrets from .env
+  - pytest
+  - pytest-cov
+  - flake8          # 2.2 style checker
+  - black           # 2.2 formatter
+  - isort           # optional: sort imports
+  - pylint          # optional: inspect code smells
+  - radon           # optional: inspect complexity
+  - pip
+  - pip:
+      - detect-secrets   # 2.5 scan for hard-coded secrets

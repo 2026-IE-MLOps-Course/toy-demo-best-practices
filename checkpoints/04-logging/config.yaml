@@ -1,0 +1,22 @@
+# config.yaml: single source of truth for NON-SECRET settings
+# Change behaviour here, not in the code. Secrets go in .env, never here
+
+paths:
+  raw_data: "data/raw/customers.csv"   # try "data/raw/customers_bad.csv"
+  report: "reports/metrics.json"
+  log_file: "logs/pipeline.log"
+
+data:
+  required_columns: ["customer_id", "usage_hours", "churned"]
+  feature: "usage_hours"
+  target: "churned"
+
+model:
+  usage_threshold: 10.0                # predict churn below this many hours
+
+quality_gate:
+  metric: "accuracy"
+  min_value: 0.80
+
+logging:
+  level: "INFO"

@@ -1,0 +1,29 @@
+# Instructor-only guide
+/DEMO_SCRIPT.md
+
+# Local values stay on each computer
+.env
+.env.*
+!.env.example
+
+# Disposable files and generated results
+tmp/
+logs/
+reports/
+models/
+__pycache__/
+.pytest_cache/
+.pytest-tmp/
+.coverage*
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+.venv/
+.vscode/
+
+# Share only the two synthetic classroom inputs
+**/data/*
+!**/data/raw/
+**/data/raw/*
+!**/data/raw/customers.csv
+!**/data/raw/customers_bad.csv
