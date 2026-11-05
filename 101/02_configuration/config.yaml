@@ -1,0 +1,6 @@
+# config.yaml: every setting we may want to change
+model:
+  usage_threshold: 10.0  # churn below this many hours
+
+paths:
+  raw_data: "data/raw/customers.csv"

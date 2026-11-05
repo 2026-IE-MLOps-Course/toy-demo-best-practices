@@ -27,3 +27,6 @@ htmlcov/
 **/data/raw/*
 !**/data/raw/customers.csv
 !**/data/raw/customers_bad.csv
+
+# Step-by-step guides inside 101
+101/**/STEPS.md
