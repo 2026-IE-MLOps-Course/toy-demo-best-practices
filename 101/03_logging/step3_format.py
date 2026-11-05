@@ -1,9 +1,13 @@
 # Step 3: every line gets the time, the level and the source
 import logging
 
-FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"  # new
+FORMAT = "%(asctime)s | %(levelname)s | %(filename)s | %(message)s"
 logging.basicConfig(level="INFO", format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")  # new
-logger = logging.getLogger("churn")
+logger = logging.getLogger(__name__)
+
+# FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"  # new
+# logging.basicConfig(level="INFO", format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")  # new
+# logger = logging.getLogger("churn")
 
 hours = 8.0
 threshold = 10.0
