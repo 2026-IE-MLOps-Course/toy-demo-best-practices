@@ -1,4 +1,4 @@
-# Step 5: check that the setting exists, with a clear message
+# Step 4: check that the setting exists, with a clear message
 import yaml
 
 with open("config.yaml", encoding="utf-8") as file:

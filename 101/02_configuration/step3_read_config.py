@@ -1,4 +1,4 @@
-# Step 4: the same dictionary now comes from config.yaml
+# Step 3: the same dictionary now comes from config.yaml
 import yaml  # new
 
 with open("config.yaml", encoding="utf-8") as file:  # new

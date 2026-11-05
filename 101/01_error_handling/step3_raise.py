@@ -1,4 +1,4 @@
-# Step 4: detect the problem and explain it with raise
+# Step 3: detect the problem and explain it with raise
 hours = -3.0
 threshold = 10.0
 

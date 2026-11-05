@@ -7,10 +7,10 @@ Each step adds one small change to the previous step, marked `# new`
 
 | Run before | Folder | The example grows from |
 | --- | --- | --- |
-| 2.1 Error handling | `01_error_handling` | A bad value runs silently > a clear error > a planned stop > exit code 1 |
+| 2.1 Error handling | `01_error_handling` | A bad value silently fixed > a clear error > a planned stop with exit code 1 |
 | 2.2 Code quality | None | The demo itself is the illustration: `flake8` lists, `black` rewrites |
-| 2.3 Configuration | `02_configuration` | Threshold in the code > in a dictionary > in `config.yaml` > checked |
-| 2.4 Logging | `03_logging` | `print` > levels > time and source > screen and file > an error |
-| 2.5 Security | `04_security` | Key in the code > asked by name > loaded from `.env` > ignored by Git |
+| 2.3 Configuration | `02_configuration` | Threshold in the code > in a section > in `config.yaml` > checked |
+| 2.4 Logging | `03_logging` | `print` > levels > time and source > screen and file |
+| 2.5 Security | `04_security` | Key in the code > loaded from `.env` > ignored by Git |
 
 Each folder has a `STEPS.md` (what to run, what to expect, what to say)

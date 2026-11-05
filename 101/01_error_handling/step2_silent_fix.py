@@ -1,5 +1,5 @@
-# Step 3: the bad habit, a silent "fix"
-hours = -3.0
+# Step 2: a bad value, silently "fixed"
+hours = -3.0  # new: impossible, hours cannot be negative
 threshold = 10.0
 
 if hours < 0:  # new

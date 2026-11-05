@@ -1,4 +1,4 @@
-# Step 3: the setting goes inside a section called "model"
+# Step 2: the threshold gets a name, inside a section called "model"
 cfg = {"model": {"usage_threshold": 10.0}}  # new
 
 hours = 8.0
