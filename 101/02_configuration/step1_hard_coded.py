@@ -1,9 +1,8 @@
-# Step 1: a setting typed into the code
-
-THRESHOLD = 10.0
+# Step 1: the threshold is typed into the code
 hours = 8.0
+threshold = 10.0
 
-if hours < THRESHOLD:
-    print(f"{hours} h -> churn (threshold {THRESHOLD})")
+if hours < threshold:
+    print(hours, "h -> churn")
 else:
-    print(f"{hours} h -> stay (threshold {THRESHOLD})")
+    print(hours, "h -> stay")

@@ -1,19 +1,16 @@
 # Step 6: tell the next tool with an exit code
-import sys
+import sys  # new
 
-
-def check_hours(value):
-    if value < 0:
-        raise ValueError(f"{value} is a negative usage_hours; fix the source data")
-    print(value, "is valid")
-
-
-hours = -3  # change to 5, save and run again
+hours = -3.0  # try 8.0 to see exit code 0
+threshold = 10.0
 
 try:
-    check_hours(hours)
+    if hours < 0:
+        raise ValueError(f"{hours} is a negative usage; fix the source data")
+    if hours < threshold:
+        print(hours, "h -> churn")
+    else:
+        print(hours, "h -> stay")
 except ValueError as error:
-    print(f"Stopped: {error}", file=sys.stderr)  # the error channel
-    raise SystemExit(1)  # end with failure status 1
-
-print("finished OK")  # reaching the end means exit code 0
+    print("Stopped:", error, file=sys.stderr)  # new: the error channel
+    raise SystemExit(1)  # new: end with failure status 1

@@ -1,12 +1,16 @@
-# Step 3: add time and source to every line
+# Step 3: every line gets the time, the level and the source
 import logging
 
-FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"  # new
+logging.basicConfig(level="INFO", format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")  # new
+logger = logging.getLogger("churn")
 
-logging.basicConfig(level="INFO", format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
+hours = 8.0
+threshold = 10.0
 
-load_logger = logging.getLogger("load_data")  # one logger per part of the code
-check_logger = logging.getLogger("validate")
-
-load_logger.info("Loaded %d rows from %s", 12, "customers.csv")
-check_logger.info("Validation passed: %d rows", 11)
+logger.debug("Threshold is %.1f", threshold)
+logger.info("Checking a customer with %.1f h", hours)
+if hours < threshold:
+    logger.warning("%.1f h -> churn", hours)
+else:
+    logger.info("%.1f h -> stay", hours)

@@ -1,13 +1,16 @@
-# Step 2: five levels, from detail to disaster
-import logging
+# Step 2: each print becomes a log message with a level
+import logging  # new
 
-LEVEL = "INFO"  # try "DEBUG", then "WARNING"
+LEVEL = "INFO"  # new: try "DEBUG", then "WARNING"
+logging.basicConfig(level=LEVEL, format="%(levelname)s | %(message)s")  # new
+logger = logging.getLogger("churn")  # new
 
-logging.basicConfig(level=LEVEL, format="%(levelname)s | %(message)s")
-logger = logging.getLogger("demo")
+hours = 8.0
+threshold = 10.0
 
-logger.debug("Predicting with threshold 10.0")  # detail for developers
-logger.info("Loaded 12 rows")  # normal progress
-logger.warning("Dropped 1 row with a missing value")  # odd, but we continue
-logger.error("Pipeline stopped: negative hours")  # this run failed
-logger.critical("Disk full, cannot save results")  # the whole system is in trouble
+logger.debug("Threshold is %.1f", threshold)  # new: detail for developers
+logger.info("Checking a customer with %.1f h", hours)  # new: normal progress
+if hours < threshold:
+    logger.warning("%.1f h -> churn", hours)  # new: needs attention
+else:
+    logger.info("%.1f h -> stay", hours)

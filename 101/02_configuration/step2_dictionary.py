@@ -1,13 +1,10 @@
-# Step 2: a dictionary holds settings by name
+# Step 2: the threshold moves into a dictionary, with a name
+cfg = {"usage_threshold": 10.0}  # new
 
-settings = {"usage_threshold": 10.0, "target": "churned"}
-print(settings["usage_threshold"])
-print(settings["target"])
+hours = 8.0
+threshold = cfg["usage_threshold"]  # new: look it up by name
 
-# Settings grouped in sections: a dictionary inside a dictionary
-cfg = {
-    "model": {"usage_threshold": 10.0},
-    "paths": {"raw_data": "data/raw/customers.csv"},
-}
-print(cfg["model"]["usage_threshold"])
-print(cfg["paths"]["raw_data"])
+if hours < threshold:
+    print(hours, "h -> churn")
+else:
+    print(hours, "h -> stay")
